@@ -1,0 +1,16 @@
+{
+	"if": {
+		"field": "type",
+		"equals": "Microsoft.Compute/virtualMachines"
+	},
+	"then": {
+		"effect": "auditIfNotExists",
+		"details": {
+			"type": "microsoft.devtestlab/schedules",
+			"existenceCondition": {
+				"field": "Microsoft.DevTestLab/schedules/targetResourceId",
+				"equals": "[concat(resourceGroup().id,'/providers/Microsoft.Compute/virtualMachines/',field('name'))]"
+			}
+		}
+	}
+}
